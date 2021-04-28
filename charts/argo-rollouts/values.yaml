@@ -12,8 +12,8 @@ controller:
   tolerations: []
   affinity: {}
   image:
-    repository: argoproj/argo-rollouts
-    tag: v0.10.2
+    repository: 331455399823.dkr.ecr.us-east-2.amazonaws.com/sfci/sfcd/argo-rollouts/sfcdk8s/argo-rollouts
+    tag: latest
     pullPolicy: IfNotPresent
 
   resources: {}
@@ -52,3 +52,18 @@ podLabels: {}
 # Secrets with credentials to pull images from a private registry
 imagePullSecrets: []
 # - name: argo-pull-secret
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 7447
+  # fsGroup: 2000
+
+securityContext:
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 7447
+  # runAsUser: 1000
+  allowPrivilegeEscalation: false

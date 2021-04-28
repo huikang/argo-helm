@@ -1,0 +1,14 @@
+pipeline_template: helm/Jenkinsfile
+email_reply_to: sfcd-k8s@salesforce.com
+compliance_required: true
+docker_test_images:
+  - dva/helm-tools
+# TODO: use validate-chart.sh -g -c ./charts/argo-rollouts to validate
+#       or use build_shared
+unit_tests_command: /bin/true
+production_branch: master
+# publish_to_gcp: true
+# promote_to_falcon: true
+helm_artifacts:
+- path: "/charts/argo-rollouts"
+  version: "0.10.2-${BUILD_NUMBER}"

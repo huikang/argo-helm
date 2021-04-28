@@ -6,13 +6,15 @@ metadata:
     app.kubernetes.io/component: {{ .Values.controller.component }}
     app.kubernetes.io/name: {{ .Release.Name }}
     app.kubernetes.io/part-of: {{ .Release.Name }}
-    {{- if .Values.podLabels }}
-{{- toYaml .Values.podLabels | nindent 4 }}
-    {{- end }}
+    {{- include "argo-rollouts.labels" . | nindent 4 }}
+  {{- range $label_name, $label_value := .Values.platform_labels }}
+    {{ $label_name }}: {{ $label_value }}
+  {{- end }}
 spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ .Release.Name }}
+      {{- include "argo-rollouts.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- if .Values.podAnnotations }}
@@ -23,12 +25,19 @@ spec:
       {{- end }}
       labels:
         app.kubernetes.io/name: {{ .Release.Name }}
+        {{- include "argo-rollouts.labels" . | nindent 8 }}
+        {{- include "argo-rollouts.selectorLabels" . | nindent 8 }}
+      {{- range $label_name, $label_value := .Values.platform_labels }}
+        {{ $label_name }}: {{ $label_value }}
+      {{- end }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       serviceAccountName: {{ .Values.serviceAccount.name }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
       - image: "{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"
         {{- if not .Values.clusterInstall }}
@@ -37,6 +46,8 @@ spec:
         {{- end }}
         imagePullPolicy: {{ .Values.controller.image.pullPolicy }}
         name: {{ .Values.controller.name }}
+        securityContext:
+          {{- toYaml .Values.securityContext | nindent 12 }}
         resources:
 {{- toYaml .Values.controller.resources | nindent 10 }}
         securityContext:

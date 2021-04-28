@@ -1,0 +1,9 @@
+clean: true
+mock_secret:
+ -
+  id: argo-helm://charts/argo-cd/values.yaml_8cf656216542956d153a24e130797998a4a191b7
+  justification: These are passwords used for dev and demo purposes, not real secrets
+ -
+  id: argo-helm://charts/argo-cd/values.yaml_b1cfdc514f9882f9f064c103655511567c666502
+  justification: These are passwords used for dev and demo purposes, not real secrets
+non_production_secret: []
