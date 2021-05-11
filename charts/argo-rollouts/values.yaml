@@ -65,5 +65,8 @@ securityContext:
   readOnlyRootFilesystem: true
   runAsNonRoot: true
   runAsUser: 7447
+  runAsGroup: 7447
   # runAsUser: 1000
   allowPrivilegeEscalation: false
+
+nativeIdentity: false

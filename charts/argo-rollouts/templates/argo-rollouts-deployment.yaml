@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app.kubernetes.io/component: {{ .Values.controller.component }}
     app.kubernetes.io/name: {{ .Release.Name }}
@@ -19,6 +20,9 @@ spec:
     metadata:
       {{- if .Values.podAnnotations }}
       annotations:
+      {{ if (eq (toString .Values.nativeIdentity) "true") }}
+        identity.eks.sfdc.com/use-native-identity: enabled
+      {{- end }}
       {{- range $key, $value := .Values.podAnnotations }}
         {{ $key }}: {{ $value | quote }}
       {{- end }}
@@ -46,12 +50,13 @@ spec:
         {{- end }}
         imagePullPolicy: {{ .Values.controller.image.pullPolicy }}
         name: {{ .Values.controller.name }}
-        securityContext:
-          {{- toYaml .Values.securityContext | nindent 12 }}
         resources:
 {{- toYaml .Values.controller.resources | nindent 10 }}
         securityContext:
-          {{- toYaml .Values.securityContext | nindent 12 }}
+          {{- toYaml .Values.securityContext | nindent 10 }}
+        {{ if (eq (toString .Values.nativeIdentity) "true") }}
+          fsGroup: 7447
+        {{- end }}
         resources:
           {{- toYaml .Values.controller.resources | nindent 10 }}
       {{- if .Values.controller.nodeSelector }}
