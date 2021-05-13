@@ -40,6 +40,16 @@ crdAnnotations: {}
 ## Annotations to be added to the Rollout pods
 ##
 podAnnotations: {}
+# podAnnotations:
+#   opencensus.k8s-integration.sfdc.com/inject: enabled
+#   opencensus.k8s-integration.sfdc.com/prometheus-targets: >
+#     [
+#       {
+#         "path": "/metrics",
+#         "port": "8090",
+#         "container_name": "argo-rollouts"
+#       }
+#     ]
 
 ## Annotations to be added to the Rollout service
 ##
