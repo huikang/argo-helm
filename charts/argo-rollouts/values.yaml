@@ -41,7 +41,6 @@ crdAnnotations: {}
 ##
 # podAnnotations: {}
 podAnnotations:
-  opencensus.k8s-integration.sfdc.com/development-pki: enabled
   opencensus.k8s-integration.sfdc.com/inject: enabled
   opencensus.k8s-integration.sfdc.com/prometheus-targets: >
     [
@@ -81,3 +80,4 @@ securityContext:
   allowPrivilegeEscalation: false
 
 nativeIdentity: false
+automountServiceAccountToken: true
