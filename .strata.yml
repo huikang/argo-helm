@@ -11,4 +11,4 @@ production_branch: master
 # promote_to_falcon: true
 helm_artifacts:
 - path: "/charts/argo-rollouts"
-  version: "0.10.2-${BUILD_NUMBER}"
+  version: "1.0.2-${BUILD_NUMBER}"
