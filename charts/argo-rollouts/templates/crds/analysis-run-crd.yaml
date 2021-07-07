@@ -802,11 +802,6 @@ spec:
                                                     type: integer
                                                 type: object
                                               resources:
-                                                properties:
-                                                  limits:
-                                                    x-kubernetes-preserve-unknown-fields: true
-                                                  requests:
-                                                    x-kubernetes-preserve-unknown-fields: true
                                                 type: object
                                               securityContext:
                                                 properties:
@@ -1356,11 +1351,6 @@ spec:
                                                     type: integer
                                                 type: object
                                               resources:
-                                                properties:
-                                                  limits:
-                                                    x-kubernetes-preserve-unknown-fields: true
-                                                  requests:
-                                                    x-kubernetes-preserve-unknown-fields: true
                                                 type: object
                                               securityContext:
                                                 properties:
@@ -1918,11 +1908,6 @@ spec:
                                                     type: integer
                                                 type: object
                                               resources:
-                                                properties:
-                                                  limits:
-                                                    x-kubernetes-preserve-unknown-fields: true
-                                                  requests:
-                                                    x-kubernetes-preserve-unknown-fields: true
                                                 type: object
                                               securityContext:
                                                 properties:
@@ -2267,7 +2252,7 @@ spec:
                                           - whenUnsatisfiable
                                           x-kubernetes-list-type: map
                                         volumes:
-                                          x-kubernetes-preserve-unknown-fields: true
+                                          x-kubernetes-preserve-unknown-fields: false
                                       required:
                                       - containers
                                       type: object
