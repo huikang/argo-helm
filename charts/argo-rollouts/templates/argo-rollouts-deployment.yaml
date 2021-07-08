@@ -14,7 +14,6 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ .Release.Name }}
       {{- include "argo-rollouts.selectorLabels" . | nindent 6 }}
   template:
     metadata:
@@ -28,7 +27,6 @@ spec:
       {{- end }}
       {{- end }}
       labels:
-        app.kubernetes.io/name: {{ .Release.Name }}
         {{- include "argo-rollouts.labels" . | nindent 8 }}
         {{- include "argo-rollouts.selectorLabels" . | nindent 8 }}
       {{- range $label_name, $label_value := .Values.platform_labels }}
