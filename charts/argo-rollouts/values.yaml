@@ -16,13 +16,13 @@ controller:
     tag: 17
     pullPolicy: IfNotPresent
 
-  resources: {}
-  #  limits:
-  #    cpu: 100m
-  #    memory: 128Mi
-  #  requests:
-  #    cpu: 50m
-  #    memory: 64Mi
+  resources:
+   limits:
+     cpu: 500m
+     memory: 500Mi
+   requests:
+     cpu: 250m
+     memory: 500Mi
 
   metrics:
     serviceMonitor:
