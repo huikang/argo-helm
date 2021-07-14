@@ -13,7 +13,7 @@ controller:
   affinity: {}
   image:
     repository: 331455399823.dkr.ecr.us-east-2.amazonaws.com/sfci/sfcd/argo-rollouts/sfcdk8s/argo-rollouts
-    tag: 17
+    tag: 25
     pullPolicy: IfNotPresent
 
   resources:
